@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Timeline</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 40px auto;
+      padding: 40px 0;
+      width: 90%;
+      max-width: 900px;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: #0d6efd;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .container {
+      padding: 20px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    .container.left {
+      left: 0;
+    }
+
+    .container.right {
+      left: 50%;
+    }
+
+    .container::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: white;
+      border: 4px solid #0d6efd;
+      top: 30px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .right::after {
+      left: -10px;
+    }
+
+    .content {
+      padding: 20px;
+      background-color: white;
+      position: relative;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+
+    .date-range {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 10px;
+      }
+
+      .container {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 15px;
+      }
+
+      .container::after {
+        left: 0;
+      }
+
+      .right {
+        left: 0%;
+      }
+
+      .right::after {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="timeline">
+    {% for exp in work_experiences %}
+    <div class="container {{ loop.index % 2 == 0 and 'right' or 'left' }}">
+      <div class="content">
+        <h3>{{ exp.title }} - {{ exp.company }}</h3>
+        <p class="date-range">{{ exp.start }} - {{ exp.end }}</p>
+        <p>{{ exp.desc }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>
